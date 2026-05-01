@@ -23,4 +23,3 @@ elif media < 7 and media >= 5:
 
 else:
     print("Reprovado!")
-
