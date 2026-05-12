@@ -1,7 +1,10 @@
-nome = "Daniel"
-frutas = ["Mamão", "Laranja", "Banana"]
+frutas = []
 
-print(nome[0])
-print(frutas[0])
+repeticoes = int(input("Quantas frutas você quer inserir?"))
 
-frutas.append("Abacaxi")
+for fruta in range(repeticoes):
+    fruta = input("Digite o nome da fruta:")
+    frutas.append(fruta)
+
+for fruta in frutas:
+    print(fruta)
