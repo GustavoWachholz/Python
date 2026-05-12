@@ -38,6 +38,8 @@ while adicionarProduto:
         elif acao == "4":
             adicionarProduto = False
             break
+        else:
+            print("Opção inválida, tente novamente")
         
         print(menu)
         acao = input()
