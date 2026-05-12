@@ -17,12 +17,31 @@ while adicionarProduto:
     subtotal = float(preco * quantidade)
     subtotais.append(subtotal)
 
-    adicionar = input("Quer adicionar mais um produto? sim ou não: \n")
+    menu = """
+    O que você quer fazer agora?
+    1 - Adicionar um novo produto
+    2 - Mostrar subtotal
+    3 - Mostrar total parcial
+    4 - Finalizar compra
+    """
+    print(menu)
+    acao = input()
 
-    if adicionar == "sim":
-        adicionarProduto = True
-    else:
-        adicionarProduto = False
+    while True:
+        if acao == "1":
+            adicionarProduto = True
+            break
+        elif acao == "2":
+            print(f"O subtotal do produto é de R$ {subtotal}")
+        elif acao == "3":
+            print(f"O total da compra até o momento é de R$ {sum(subtotais)}")
+        elif acao == "4":
+            adicionarProduto = False
+            break
+        
+        print(menu)
+        acao = input()
+
 
 for indice, produto in enumerate(produtos):
 
