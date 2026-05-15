@@ -1,6 +1,8 @@
-idade = int(input("Insira uma idade entre 0 e 120: "))
-
-while idade < 0 or idade > 120:
-    idade = int(input("Idade inválida, insira novamente: "))
-
-print(idade)
+while True:
+    idade = int(input("Digite uma idade entre 0 e 120: "))
+    
+    if idade < 0 or idade > 120:
+        continue
+    else:
+        print(idade)
+        break
