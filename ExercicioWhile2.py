@@ -1,20 +1,18 @@
 executar = True
 numeros = []
 while executar:
-    cont = 0
     while True:
         numero = input("Digite um número. Digite 0 para parar: ")
         if numero != "":
             numero = int(numero)
             if numero != 0:
-                cont += 1
                 numeros.append(numero)
             else:
                 break
         else:
             print("É necessário digitar um número")
 
-    print(f"Quantidade de números digitados: {cont}")
+    print(f"Quantidade de números digitados: {len(numeros)}")
     for indice, numero in enumerate(numeros):
         print(numeros[indice])
     
