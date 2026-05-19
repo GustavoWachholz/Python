@@ -130,7 +130,7 @@ Digite a opção desejada: """
                     break
                 elif formaPagamentoSelecionada == "3":
                     formaPagamento = "Cartão de Débito"
-                    valorFinal == total * 1
+                    valorFinal = total
                     break
                 elif formaPagamentoSelecionada == "4":
                     formaPagamento = "Cartão de Crédito"
@@ -162,6 +162,12 @@ Digite a opção desejada: """
             finalizar = input(menu_confirmacao)
             
             if finalizar == "1":
+                produtosSelecionados.clear()
+                quantidadesProdutosSelecionados.clear()
+                subtotaisProdutosSelecionados.clear()
+                total = 0
+                valorFinal = 0
+                formaPagamento = ""
                 break
             elif finalizar == "2":
                 valorFinal = sum(subtotaisProdutosSelecionados)
