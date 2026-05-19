@@ -48,19 +48,7 @@ Digite a opção desejada: """
                 break
         
     elif opcao == 2:
-        print("\n========================================")
-        print("          CATÁLOGO DE PRODUTOS")
-        print("========================================")
-        print("CÓDIGO | NOME                 | PREÇO")
-        print("----------------------------------------")
-
-        for i, produto in enumerate(produtos):
-            nome = produtos[i]
-            preco = precos[i]
-            print(f"[{i}]    | {nome:<20} | R$ {preco:.2f}")
-            
-    elif opcao == 3:
-        while True:
+        if len(produtos) > 0:
             print("\n========================================")
             print("          CATÁLOGO DE PRODUTOS")
             print("========================================")
@@ -71,81 +59,68 @@ Digite a opção desejada: """
                 nome = produtos[i]
                 preco = precos[i]
                 print(f"[{i}]    | {nome:<20} | R$ {preco:.2f}")
+            continue
+        else:
+            print("NÃO EXISTEM PRODUTOS CADASTRADOS")
+            continue
+            
+    elif opcao == 3:
+        if len(produtos) > 0:
+            while True:
+                print("\n========================================")
+                print("          CATÁLOGO DE PRODUTOS")
+                print("========================================")
+                print("CÓDIGO | NOME                 | PREÇO")
+                print("----------------------------------------")
+
+                for i, produto in enumerate(produtos):
+                    nome = produtos[i]
+                    preco = precos[i]
+                    print(f"[{i}]    | {nome:<20} | R$ {preco:.2f}")
                 
-            codigoProduto = int(input("Selecione o código do produto: "))
-            quantidadeProduto = int(input("Informe a quantidade do produto: "))
+                codigoProduto = int(input("Selecione o código do produto: "))
+                quantidadeProduto = int(input("Informe a quantidade do produto: "))
             
-            produtosSelecionados.append(produtos[codigoProduto])
-            quantidadesProdutosSelecionados.append(quantidadeProduto)
-            subtotaisProdutosSelecionados.append(quantidadeProduto * precos[codigoProduto])
+                produtosSelecionados.append(produtos[codigoProduto])
+                quantidadesProdutosSelecionados.append(quantidadeProduto)
+                subtotaisProdutosSelecionados.append(quantidadeProduto * precos[codigoProduto])
             
-            novoProduto = input("Deseja inserir um novo produto? S ou N: ")
+                novoProduto = input("Deseja inserir um novo produto? S ou N: ")
             
-            if novoProduto == "S":
-                continue
-            else:
-                total = sum(subtotaisProdutosSelecionados)
-                break
+                if novoProduto == "S":
+                    continue
+                else:
+                    total = sum(subtotaisProdutosSelecionados)
+                    break
+        else:
+            print("NÃO EXISTEM PRODUTOS CADASTRADOS")
+            continue
             
     elif opcao == 4:
-        print("\n========================================")
-        print("          CATÁLOGO DE PRODUTOS")
-        print("========================================")
-        print("CÓDIGO | NOME                 | PREÇO")
-        print("----------------------------------------")
+        if len(produtosSelecionados) > 0:
+            print("\n========================================")
+            print("          CATÁLOGO DE PRODUTOS")
+            print("========================================")
+            print("CÓDIGO | NOME                 | PREÇO")
+            print("----------------------------------------")
 
-        for i, produtoSelecionado in enumerate(produtosSelecionados):
-            nome = produtosSelecionados[i]
-            subtotalProdutoSelecionado = subtotaisProdutosSelecionados[i]
-            print(f"[{i}]    | {nome:<20} | R$ {subtotalProdutoSelecionado:.2f}")
+            for i, produtoSelecionado in enumerate(produtosSelecionados):
+                nome = produtosSelecionados[i]
+                subtotalProdutoSelecionado = subtotaisProdutosSelecionados[i]
+                print(f"[{i}]    | {nome:<20} | R$ {subtotalProdutoSelecionado:.2f}")
+                continue
+        else:
+            print("SEU CARRINHO ESTÁ VAZIO.")
+            continue
             
     elif opcao == 5:
-        print("\n========================================")
-        print("           RESUMO DA COMPRA")
-        print("========================================")
-        print("QTD | PRODUTO              | SUBTOTAL")
-        print("----------------------------------------")
-        
-        for i, produtoSelecionado in enumerate(produtosSelecionados):
-            quantidade = quantidadesProdutosSelecionados[i]
-            nome = produtosSelecionados[i]
-            subtotal = subtotaisProdutosSelecionados[i]
-            print(f"{quantidade:<3} | {nome:<20} | R$ {subtotal:.2f}")
-            
-        print("----------------------------------------")
-        print(f"VALOR TOTAL: R$ {total:.2f}")
-        print("========================================\n")
-        
-        while True:
-            print(menu_pagamento)
-            formaPagamentoSelecionada = input()
-            while True:
-                if formaPagamentoSelecionada == "1":
-                    formaPagamento = "Dinheiro"
-                    valorFinal = total * 0.88
-                    break
-                elif formaPagamentoSelecionada == "2":
-                    formaPagamento = "Pix"
-                    valorFinal = total * 0.90
-                    break
-                elif formaPagamentoSelecionada == "3":
-                    formaPagamento = "Cartão de Débito"
-                    valorFinal = total
-                    break
-                elif formaPagamentoSelecionada == "4":
-                    formaPagamento = "Cartão de Crédito"
-                    valorFinal = total * 1.1
-                    break
-                else:
-                    print('Opção inválida, tente novamente.')
-                    continue
-                
+        if len(subtotaisProdutosSelecionados) > 0:
             print("\n========================================")
-            print("           RECIBO DE COMPRA")
+            print("           RESUMO DA COMPRA")
             print("========================================")
             print("QTD | PRODUTO              | SUBTOTAL")
             print("----------------------------------------")
-            
+        
             for i, produtoSelecionado in enumerate(produtosSelecionados):
                 quantidade = quantidadesProdutosSelecionados[i]
                 nome = produtosSelecionados[i]
@@ -153,32 +128,72 @@ Digite a opção desejada: """
                 print(f"{quantidade:<3} | {nome:<20} | R$ {subtotal:.2f}")
             
             print("----------------------------------------")
-            print(f"Subtotal bruto:        R$ {total:.2f}")
-            print(f"Forma de Pagamento:    {formaPagamento}")
-            print("========================================")
-            print(f"VALOR TOTAL LÍQUIDO:   R$ {valorFinal:.2f}")
+            print(f"VALOR TOTAL: R$ {total:.2f}")
             print("========================================\n")
+        
+            while True:
+                print(menu_pagamento)
+                formaPagamentoSelecionada = input()
+                if formaPagamentoSelecionada == "1":
+                    formaPagamento = "Dinheiro"
+                    valorFinal = total * 0.88
+                elif formaPagamentoSelecionada == "2":
+                    formaPagamento = "Pix"
+                    valorFinal = total * 0.90
+                elif formaPagamentoSelecionada == "3":
+                    formaPagamento = "Cartão de Débito"
+                    valorFinal = total
+                elif formaPagamentoSelecionada == "4":
+                    formaPagamento = "Cartão de Crédito"
+                    valorFinal = total * 1.1
+                else:
+                    print('Opção inválida, tente novamente.')
+                    continue
+                
+                print("\n========================================")
+                print("           RECIBO DE COMPRA")
+                print("========================================")
+                print("QTD | PRODUTO              | SUBTOTAL")
+                print("----------------------------------------")
             
-            finalizar = input(menu_confirmacao)
+                for i, produtoSelecionado in enumerate(produtosSelecionados):
+                    quantidade = quantidadesProdutosSelecionados[i]
+                    nome = produtosSelecionados[i]
+                    subtotal = subtotaisProdutosSelecionados[i]
+                    print(f"{quantidade:<3} | {nome:<20} | R$ {subtotal:.2f}")
             
-            if finalizar == "1":
-                produtosSelecionados.clear()
-                quantidadesProdutosSelecionados.clear()
-                subtotaisProdutosSelecionados.clear()
-                total = 0
-                valorFinal = 0
-                formaPagamento = ""
-                break
-            elif finalizar == "2":
-                valorFinal = sum(subtotaisProdutosSelecionados)
-                continue
-            else:
-                print('Opção inválida, tente novamente.')
-                continue
-        break
+                print("----------------------------------------")
+                print(f"Subtotal bruto:        R$ {total:.2f}")
+                print(f"Forma de Pagamento:    {formaPagamento}")
+                print("========================================")
+                print(f"VALOR TOTAL LÍQUIDO:   R$ {valorFinal:.2f}")
+                print("========================================\n")
+            
+                finalizar = input(menu_confirmacao)
+            
+                if finalizar == "1":
+                    produtosSelecionados.clear()
+                    quantidadesProdutosSelecionados.clear()
+                    subtotaisProdutosSelecionados.clear()
+                    total = 0
+                    valorFinal = 0
+                    formaPagamento = ""
+                    print("TRANSAÇÃO FINALIZADA COM SUCESSO!")
+                    break
+                elif finalizar == "2":
+                    valorFinal = sum(subtotaisProdutosSelecionados)
+                    continue
+                else:
+                    print('Opção inválida, tente novamente.')
+                    continue
+        else:
+            print("SEU CARRINHO ESTÁ VAZIO.")
+            continue
+           
+    elif opcao == 0:
+        print("PROGRAMA ENCERRADO.")
+        break       
             
     else:
         print('Opção inválida, tente novamente.')
         continue
-    
-print("TRANSAÇÃO FINALIZADA COM SUCESSO!")
